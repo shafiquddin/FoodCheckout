@@ -19,13 +19,26 @@ const Checkout = () => {
         const fd = new FormData(event.target);
         const customerData = Object.fromEntries(fd.entries());
         console.log(customerData);
+
+        fetch('http://localhost:3000/orders',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                order:{
+                    items:cartCtx.items,
+                    customer:customerData
+                }
+            }),
+        })
     }
 
     return <Modal open={userProgressCtx.process === 'checkout'}>
          <form onSubmit={handleSubmit}>
         <h2>Checkout</h2>
         <p>Total Amount: {currencyFormatter.format(cartTotal)}</p>
-        <Input type='text' label='Full Name' id='full-name'/>
+        <Input type='text' label='Full Name' id='name'/>
         <Input type='email' label='Email Address' id='email'/>
         <Input type='text' label='Street' id='street'/>
         <div className="control-row">
