@@ -63,8 +63,6 @@ export const CartContextProvider = ({children}) =>{
         removeItem:onRemoveItemHandler
     }
 
-    console.log(cartCtx);
-
     return <CartContex.Provider value={cartCtx}>{children}</CartContex.Provider>
 } 
 

@@ -12,8 +12,17 @@ const Checkout = () => {
     const cartTotal = cartCtx.items.reduce((totalPrice,item)=> {
         return totalPrice + item.price * item.quantity
     },0)
+
+    const handleSubmit = (event) =>{
+        
+        event.preventDefault();
+        const fd = new FormData(event.target);
+        const customerData = Object.fromEntries(fd.entries());
+        console.log(customerData);
+    }
+
     return <Modal open={userProgressCtx.process === 'checkout'}>
-         <form>
+         <form onSubmit={handleSubmit}>
         <h2>Checkout</h2>
         <p>Total Amount: {currencyFormatter.format(cartTotal)}</p>
         <Input type='text' label='Full Name' id='full-name'/>
